@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="{{ LANGUAGE_CODE|default:"fr-fr" }}">
+<head>
+    <meta charset="utf-8">
+
+	<title>{% block title %}{% endblock %}</title>
+	<link rel="stylesheet" type="text/css" href="{% static './style.css'%}" />
+
+
+</head>
+
+<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
+
+
+<!-- Container -->
+<div id="container">
+
+	<div id="user_table">
+        {% block user_table %}{% endblock %}
+    </div>
+	{% block nav-global %}{% endblock %}
+
+	<!-- Content -->
+    <div id="content" class="{% block coltype %}colM{% endblock %}">
+        {% block pretitle %}{% endblock %}
+        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+        {% block content %}
+        {% block object-tools %}{% endblock %}
+        {{ content }}
+        {% endblock %}
+        {% block sidebar %}{% endblock %}
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+
+    {% block footer %}<div id="footer"></div>{% endblock %}
+</div>
+<!-- END Container -->
+<script>
+(function() {
+  var img = new Image,
+      user_alt = encodeURIComponent('Drey77'),
+      profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg');
+  img.src = 'http://localhost:8000/pixel/top_user.gif?user_alt=' + user_alt + '&profile_picture=' + profile_picture;
+})()
+//Pour serveur test : https://andre.test.topchretien.com/pixel/top_user.gif?user_alt=' + user_alt + '&profile_picture=' + profile_picture;
+//Pour serveur local : http://localhost:8000/pixel/top_user.gif?user_alt=' + user_alt + '&profile_picture=' + profile_picture;
+</script>
+{% block script %}
+
+{% endblock %}
+
+
+</body>
+</html>

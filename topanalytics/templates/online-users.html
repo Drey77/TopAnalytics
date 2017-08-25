@@ -1,0 +1,15 @@
+{% extends "./base.html" %}
+
+{% block title %}
+Utilisateurs en ligne
+{% endblock %}
+{% block bodyclass %}online-users-body{% endblock %}
+{% block content %}
+<section id="img-container">
+	{% for img in imgs %}
+	<div>
+		<img src="{{img.profile_picture}}">
+	</div>
+	{% endfor %}
+</section>
+{% endblock %}
