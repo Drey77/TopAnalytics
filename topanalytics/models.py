@@ -36,8 +36,10 @@ class Tag(models.Model):
 
 
 class Meta_TopChretien(models.Model):
-	user_alt = models.CharField(max_length=25, blank=True, unique=True)
+	nickname = models.CharField(max_length=25, blank=True, unique=True)
+	topuser_id = models.CharField(max_length=254, blank=True, unique=True)
 	profile_picture = models.CharField(max_length=254, blank=True)
+	gender = models.CharField(max_length=254, blank=True)
 
 	def __str__(self):
-		return self.user_alt
+		return self.nickname

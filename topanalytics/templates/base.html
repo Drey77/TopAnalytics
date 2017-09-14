@@ -42,12 +42,16 @@
 <script>
 (function() {
   var img = new Image,
-      user_alt = encodeURIComponent('Drey77'),
-      profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg');
-  img.src = 'http://localhost:8000/pixel/top_user.gif?user_alt=' + user_alt + '&profile_picture=' + profile_picture;
+      nickname = encodeURIComponent('Drey77'),
+      topuser_id = encodeURIComponent('1234'),
+      profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+      gender = encodeURIComponent('male');
+
+  img.src = 'http://localhost:8000/pixel/top_user.gif?topuser_id=' + topuser_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
 })()
-//Pour serveur test : https://andre.test.topchretien.com/pixel/top_user.gif?user_alt=' + user_alt + '&profile_picture=' + profile_picture;
-//Pour serveur local : http://localhost:8000/pixel/top_user.gif?user_alt=' + user_alt + '&profile_picture=' + profile_picture;
+//Pour serveur test : 'https://andre.test.topchretien.com/pixel/top_user.gif?topuser_id=' + topuser_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+//Pour serveur local : 'http://localhost:8000/pixel/top_user.gif?topuser_id=' + topuser_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
 </script>
 {% block script %}
 
