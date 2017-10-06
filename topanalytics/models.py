@@ -14,13 +14,12 @@ class Website(models.Model):
 	view_id = models.IntegerField(default=0, blank=True)
 	view_name = models.CharField(max_length=254, blank=True)
 	entry_date = models.DateTimeField('Website entry date', default=timezone.now)
-	users = models.ManyToManyField(User, blank=True, related_name='websites')
-	#Ici  ManyToManyField créera la table intermédiaire entre Website et User.
+	users = models.ManyToManyField(User, blank=True, related_name='users')
+	#Ici  ManyToManyField will create a intermediate table between Website and User.
 	def __str__(self):
 		return self.view_name
 
-
-class Tag(models.Model):
+class ActionType(models.Model):
 	label = models.CharField(max_length=254, blank=True)
 	date_added = models.DateTimeField('date added', default=timezone.now)
 
@@ -35,11 +34,24 @@ class Tag(models.Model):
 	was_added_recently.short_description = 'Added recently ?'
 
 
-class Meta_TopChretien(models.Model):
-	topuser_id = models.CharField(max_length=254, blank=True, unique=True)
-	nickname = models.CharField(max_length=25, blank=True, unique=True)
+class WebsiteUser(models.Model):
+	website_user_id = models.CharField(max_length=254, blank=True, unique=True)
+	nickname = models.CharField(max_length=25, blank=True)
 	profile_picture = models.CharField(max_length=254, blank=True)
 	gender = models.CharField(max_length=254, blank=True)
+	first_entry = models.DateTimeField('User\'s first entry date', default=timezone.now)
+	last_active = models.DateTimeField('User\'s last active', default=timezone.now, blank=True)
+	website = models.ForeignKey(Website, related_name='websiteuser', on_delete=models.CASCADE)
+	#Relation Many to One with Website
+	user_city = models.CharField(max_length=254, blank=True)
+	user_country = models.CharField(max_length=254, blank=True)
 
 	def __str__(self):
-		return self.topuser_id
+		return self.website_user_id
+
+	def is_still_active(self):
+		now = timezone.now()
+		return now - datetime.timedelta(minutes=1) <= self.last_active <= now
+	is_still_active.admin_order_field = 'is_still_active'
+	is_still_active.boolean = True
+	is_still_active.short_description = 'Is the user still active ?'

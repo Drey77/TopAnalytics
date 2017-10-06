@@ -1,0 +1,16 @@
+<section id="users-online">
+
+	<div>
+		Online users : {{users_online}}
+	</div>
+</section>
+
+<section id="img-section">
+	{% for img in imgs %}
+	<div>
+		<img src="{{img.profile_picture}}"> Locality : {{img.user_city}}
+	</div>
+	{% endfor %}
+</section>
+
+

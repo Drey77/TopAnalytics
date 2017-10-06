@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^board$', views.BoardView.as_view(), name='board'),
     url(r'^pixel/(?P<pixel>\w+).gif$', views.PixelView.as_view(), name='pixel'),
     url(r'^online-users$', views.online_users, name='online-users'),
+    url(r'^online-users-display$', views.online_users_display, name='online-users-display'),
 ]

@@ -1,6 +1,7 @@
 {% load static %}
-
 <!DOCTYPE html>
+
+<script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
 
 <html lang="{{ LANGUAGE_CODE|default:"fr-fr" }}">
 <head>
@@ -28,8 +29,7 @@
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
         {% block content %}
-        {% block object-tools %}{% endblock %}
-        {{ content }}
+
         {% endblock %}
         {% block sidebar %}{% endblock %}
         <br class="clear" />
@@ -41,17 +41,229 @@
 <!-- END Container -->
 <script>
 (function() {
-  var img = new Image,
-      nickname = encodeURIComponent('Drey77'),
-      topuser_id = encodeURIComponent('1234'),
-      profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
-      gender = encodeURIComponent('male');
 
-  img.src = 'http://localhost:8000/pixel/top_user.gif?topuser_id=' + topuser_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+/********Temporary, for testing*********/
+
+  sim_visitors();
+
+  function ping_users(){
+
+    setTimeout(function(){
+      sim_visitors();
+      console.log("ping_users done at : " + Date());
+    }, 60000);
+  }
+
+  function sim_visitors(){
+    var img = new Image,
+        nickname = encodeURIComponent('Drey77'),
+        website_user_id = encodeURIComponent('1234'),
+        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+        gender = encodeURIComponent('male');
+
+    img.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img2 = new Image,
+        nickname = encodeURIComponent('TestCase'),
+        website_user_id = encodeURIComponent('1111'),
+        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+        gender = encodeURIComponent('male');
+        date = Date.now();
+
+    img2.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=130.93.10.89";
+
+    var img3 = new Image,
+        nickname = encodeURIComponent('TestCase1'),
+        website_user_id = encodeURIComponent('1112'),
+        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+        gender = encodeURIComponent('male');
+
+    img3.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img4 = new Image,
+          nickname = encodeURIComponent('TestCase2'),
+          website_user_id = encodeURIComponent('1113'),
+          profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+          gender = encodeURIComponent('male');
+
+    img4.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img5 = new Image,
+          nickname = encodeURIComponent('TestCase3'),
+          website_user_id = encodeURIComponent('1114'),
+          profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+          gender = encodeURIComponent('male');
+
+    img5.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img6 = new Image,
+            nickname = encodeURIComponent('TestCase4'),
+            website_user_id = encodeURIComponent('1115'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+    img6.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img7 = new Image,
+            nickname = encodeURIComponent('TestCase5'),
+            website_user_id = encodeURIComponent('1116'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+    img7.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img8 = new Image,
+            nickname = encodeURIComponent('TestCase6'),
+            website_user_id = encodeURIComponent('1117'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+    img8.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img9 = new Image,
+            nickname = encodeURIComponent('TestCase7'),
+            website_user_id = encodeURIComponent('1118'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+    img9.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img10 = new Image,
+            nickname = encodeURIComponent('TestCase8'),
+            website_user_id = encodeURIComponent('1119'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+    img10.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img11 = new Image,
+            nickname = encodeURIComponent('TestCase9'),
+            website_user_id = encodeURIComponent('1120'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img11.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img12 = new Image,
+            nickname = encodeURIComponent('TestCase10'),
+            website_user_id = encodeURIComponent('1121'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img12.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img13 = new Image,
+            nickname = encodeURIComponent('TestCase11'),
+            website_user_id = encodeURIComponent('1122'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img13.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img14 = new Image,
+            nickname = encodeURIComponent('TestCase12'),
+            website_user_id = encodeURIComponent('1123'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img14.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img15 = new Image,
+            nickname = encodeURIComponent('TestCase13'),
+            website_user_id = encodeURIComponent('1124'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img15.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img16 = new Image,
+            nickname = encodeURIComponent('TestCase14'),
+            website_user_id = encodeURIComponent('1125'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img16.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img17 = new Image,
+            nickname = encodeURIComponent('TestCase15'),
+            website_user_id = encodeURIComponent('1126'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img17.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img18 = new Image,
+            nickname = encodeURIComponent('TestCase16'),
+            website_user_id = encodeURIComponent('1127'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img18.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img19 = new Image,
+            nickname = encodeURIComponent('TestCase17'),
+            website_user_id = encodeURIComponent('1128'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img19.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img20 = new Image,
+            nickname = encodeURIComponent('TestCase18'),
+            website_user_id = encodeURIComponent('1129'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img20.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img21 = new Image,
+            nickname = encodeURIComponent('TestCase19'),
+            website_user_id = encodeURIComponent('1130'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img21.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img22 = new Image,
+            nickname = encodeURIComponent('TestCase20'),
+            website_user_id = encodeURIComponent('1131'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img22.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img23 = new Image,
+            nickname = encodeURIComponent('TestCase21'),
+            website_user_id = encodeURIComponent('1132'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img23.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img24 = new Image,
+            nickname = encodeURIComponent('TestCase22'),
+            website_user_id = encodeURIComponent('1133'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img24.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    var img25 = new Image,
+            nickname = encodeURIComponent('TestCase23'),
+            website_user_id = encodeURIComponent('1134'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+
+        img25.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+    console.log("simulation of visits");
+    ping_users();
+  }
 
 })()
-//Pour serveur test : 'https://andre.test.topchretien.com/pixel/top_user.gif?topuser_id=' + topuser_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
-//Pour serveur local : 'http://localhost:8000/pixel/top_user.gif?topuser_id=' + topuser_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+
+//Pour serveur test : 'https://andre.test.topchretien.com/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
+//Pour serveur local : 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
 </script>
 {% block script %}
 

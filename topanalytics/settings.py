@@ -24,7 +24,7 @@ SECRET_KEY = '2t*3sj3wkwj0eztbr^37tg3$oiv7vw)dcg38vu*w%5rn69c3ak'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.211.128', 'localhost', '127.0.0.1', 'andre.test.topchretien.com', 'www.andre.test.topchretien.com']
+ALLOWED_HOSTS = ['192.168.211.128', 'localhost', '127.0.0.1', 'andre.test.topchretien.com', 'www.andre.test.topchretien.com', 'testserver']
 
 
 # Application definition
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
 
     # general
     'topanalytics',
@@ -74,6 +75,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'topanalytics.wsgi.application'
 
+# GeoIP Path :
+GEOIP2_DATABASE_PATH = 'topanalytics/geoip/GeoIP2-City.mmdb'
+# Path to the GeoIP2 city database. If none, no geolocalisation will be done.
+# GEOIP2_DATABASE_PATH = os.environ.get('topanalytics/geoip/', None)
+#os.path.join(BASE_DIR, 'topanalytics/geoip')
 
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
@@ -113,7 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'Europe/Paris'
 

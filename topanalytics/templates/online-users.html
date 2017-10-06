@@ -1,15 +1,37 @@
-{% extends "./base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 Utilisateurs en ligne
 {% endblock %}
-{% block bodyclass %}online-users-body{% endblock %}
-{% block content %}
-<section id="img-container">
-	{% for img in imgs %}
-	<div>
-		<img src="{{img.profile_picture}}">
-	</div>
-	{% endfor %}
-</section>
+
+
+{% block content%}
+<div id="user-container"></div>
+{% endblock %}
+
+{% block script %}
+<script>
+
+	(function poll() {
+		var poll_interval = 15000;
+
+		$.ajax({
+			url:"/online-users-display",
+			success: function(data){
+				$('#user-container').html(data);
+				console.log("refresh of users online");
+				poll_interval = 15000;
+			},
+			error: function () {
+				console.log("error");
+				poll_interval = 20000;
+			},
+			complete: function () {
+				setTimeout(function(){
+						poll();
+				}, poll_interval);
+			}
+		});
+	}) ();
+</script>
 {% endblock %}
