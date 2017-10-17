@@ -13,17 +13,21 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
-from django.conf.urls import include
+from django.conf.urls import url, include
 from django.contrib import admin
-
 from . import views
+from djgeojson.views import GeoJSONLayerView
+from . models import WebsiteUser
+from accounts.views import login_view, register_view, logout_view
 
 urlpatterns = [
-	url(r'^$', views.IndexView.as_view(), name='index'),
+    url(r'^$', views.HomePageView.as_view(), name='home'),
+    url(r'^register/$', views.UserFormView.as_view(), name='register'),
+	url(r'^login/$', login_view, name='login'),
     url(r'^admin/', admin.site.urls),
     url(r'^board$', views.BoardView.as_view(), name='board'),
     url(r'^pixel/(?P<pixel>\w+).gif$', views.PixelView.as_view(), name='pixel'),
     url(r'^online-users$', views.online_users, name='online-users'),
     url(r'^online-users-display$', views.online_users_display, name='online-users-display'),
+    url(r'^data/$', views.UserCityGeoJSONLayer.as_view(model=WebsiteUser, properties=('nickname', 'profile_picture', 'gender', 'user_city', 'user_country')), name='data')
 ]

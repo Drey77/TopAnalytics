@@ -6,7 +6,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils import timezone
-
+from django.contrib.gis.db import models as gismodels
+from django.contrib.gis.geos import Point
 
 class Website(models.Model):
 	account_id = models.CharField(max_length=254, blank=True)
@@ -45,6 +46,10 @@ class WebsiteUser(models.Model):
 	#Relation Many to One with Website
 	user_city = models.CharField(max_length=254, blank=True)
 	user_country = models.CharField(max_length=254, blank=True)
+	latitude = models.FloatField(null=True, blank=True)
+	longitude = models.FloatField(null = True, blank=True)
+	geom = gismodels.PointField(default=Point(x=0, y=0, srid=4326), blank=True, srid=4326)
+	objects = gismodels.GeoManager()
 
 	def __str__(self):
 		return self.website_user_id

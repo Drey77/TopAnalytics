@@ -36,7 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'django_extensions',
+    'leaflet',
+    'djgeojson',
 
     # general
     'topanalytics',
@@ -60,7 +63,7 @@ MEDIA_URL = os.environ.get('MEDIA_URL', '/media/')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'topanalytics/templates')],
+        'DIRS': [os.path.join(BASE_DIR, './templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,12 +90,18 @@ GEOIP2_DATABASE_PATH = 'topanalytics/geoip/GeoIP2-City.mmdb'
 DATABASES = {
     'default': {
         #'ENGINE': 'django.db.backends.sqlite3',
-        'ENGINE': 'django.db.backends.postgresql',
+        # 'ENGINE': 'django.db.backends.postgresql',
+        # 'NAME': 'topanalytics',
+        # 'USER': '',
+        # 'PASSWORD': '',
+        # 'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
+        # 'PORT': os.environ.get('DATABASE_PORT', 5432),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': 'topanalytics',
-        'USER': '',
-        'PASSWORD': '',
         'HOST': os.environ.get('DATABASE_HOST', 'localhost'),
         'PORT': os.environ.get('DATABASE_PORT', 5432),
+        'USER': '',
+        'PASSWORD': ''
     }
 }
 
@@ -134,3 +143,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER':(48.859, 2.342),
+    'DEFAULT_ZOOM': 4,
+    'MIN_ZOOM': 2,
+    'MAX_ZOOM': 18,
+    'MINIMAP': True,
+}

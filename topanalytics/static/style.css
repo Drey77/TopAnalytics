@@ -1,3 +1,7 @@
 .board-body {
     background: white;
 }
+
+#main_map {
+	height: 500px;
+}

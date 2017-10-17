@@ -1,10 +1,17 @@
+.gitignore
 core_reporting*
 client_id.json
 TopAnalytics_sublime*
 service_account*
 service_account.json
+/service_account.json
 db.sqlite3
 geoip
 cancel
 migrations
 ._GeoIP2-City.mmdb
+DataTables.zip
+bootstrap.zip
+geom_saving_point_query
+shell_plus_set*
+

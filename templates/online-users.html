@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% load leaflet_tags %}
+
+{% block head %}
+  {% leaflet_js %}
+  {% leaflet_css %}
+  <link rel="stylesheet" type="text/css" href="{% static './css/datatables.min.css'%}" />
+  <script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"> </script>
+  <script type="text/javascript" src="{% static 'dist/leaflet-realtime.js' %}"> </script>
+  <script src="{% static "js/datatables.min.js" %}"></script>
+{% endblock head %}
+
+{% block title %}
+Utilisateurs en ligne
+{% endblock %}
+
+{% block content%}
+
+<section id="world-map">
+  <h1>World Map</h1>
+  {% leaflet_map "main_map" callback="main_map_init" %}
+</section>
+
+<div id="user-container"></div>
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	function main_map_init (map, options) {
+
+/*		var website_user_data = new L.GeoJSON.AJAX("{% url 'data' %}", {
+			onEachFeature: function(feature, layer){
+				if (feature.properties.user_city == "unknown"){
+					feature.properties.user_city = "Inconnue";
+					user_city = feature.properties.user_city
+				};
+				popupContent = '<img src="'+feature.properties.profile_picture+'" />' + " </br> Pseudo : " + feature.properties.nickname + " </br> Sexe : " + feature.properties.gender + " </br> Ville : " + user_city + " </br> Pays : " + feature.properties.user_country;
+				layer.bindPopup(popupContent, {
+					maxWidth: "auto"
+				});
+			}
+		});
+
+		website_user_data.addTo(map);*/
+
+
+		var online_user_data = new L.realtime({
+			url : "{% url 'data' %}",
+			crossOrigin: true,
+			type:'json'
+		}, {
+			interval: 15000,
+			getFeatureId: function(feature){
+				return feature.id;
+			},
+			onEachFeature: function(feature, layer){
+				if (feature.properties.user_city == "unknown"){
+					feature.properties.user_city = "Inconnue";
+					user_city = feature.properties.user_city
+				} else {
+					user_city = feature.properties.user_city
+				};
+				popupContent = '<img src="'+feature.properties.profile_picture+'" />' + " </br> Pseudo : " + feature.properties.nickname + " </br> Sexe : " + feature.properties.gender + " </br> Ville : " + user_city + " </br> Pays : " + feature.properties.user_country;
+				layer.bindPopup(popupContent, {
+					maxWidth: "auto"
+				});
+			}
+		});
+		online_user_data.addTo(map);
+	}
+
+	(function poll() {
+		var poll_interval = 15000;
+
+		$.ajax({
+			url:"/online-users-display",
+			success: function(data){
+				$('#user-container').html(data);
+				console.log("refresh of users online");
+				poll_interval = 15000;
+			},
+			error: function () {
+				console.log("error");
+				poll_interval = 20000;
+			},
+			complete: function () {
+				setTimeout(function(){
+						poll();
+				}, poll_interval);
+			}
+		});
+	}) ();
+</script>
+{% endblock %}
