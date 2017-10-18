@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.views.decorators.cache import cache_control
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.urls import reverse
 from django.views import generic
@@ -121,6 +122,7 @@ class PixelView(generic.TemplateView):
 		pixel_image = "\x47\x49\x46\x38\x39\x61\x01\x00\x01\x00\x80\x00\x00\xff\xff\xff\x00\x00\x00\x21\xf9\x04\x01\x00\x00\x00\x00\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02\x44\x01\x00\x3b"
 		return HttpResponse(pixel_image, content_type='image/gif')
 
+@login_required #(login_url='/login/')
 def online_users(request):
 	return render(request, 'online-users.html')
 
@@ -134,37 +136,37 @@ def online_users_display(request):
 	return render(request, 'online-users-display.html', {'imgs': last_active_users, 'users_online': users_online})
 
 
-class UserFormView(View):
-	form_class = UserForm
-	template_name = 'registration_form.html'
+# class UserFormView(View):
+# 	form_class = UserForm
+# 	template_name = 'registration_form.html'
 
-	# display blank form
-	def get(self, request):
-		form = self.form_class(None)
-		return render(request, self.template_name, {'form': form})
+# 	# display blank form
+# 	def get(self, request):
+# 		form = self.form_class(None)
+# 		return render(request, self.template_name, {'form': form})
 
-	# process form data
-	def post(self, request):
-		form = self.form_class(request.POST)
+# 	# process form data
+# 	def post(self, request):
+# 		form = self.form_class(request.POST)
 
-		if form.is_valid():
+# 		if form.is_valid():
 
-			#Double check the entered info, not saving yet to DB
-			user = form.save(commit=False)
+# 			#Double check the entered info, not saving yet to DB
+# 			user = form.save(commit=False)
 
-			# cleaned (normalized) data then saving to DB
-			username = form.cleaned_data['username']
-			password = form.cleaned_data['password']
-			user.set_password(password)
-			user.save()
+# 			# cleaned (normalized) data then saving to DB
+# 			username = form.cleaned_data['username']
+# 			password = form.cleaned_data['password']
+# 			user.set_password(password)
+# 			user.save()
 
-			# returns User objects if credentials are correct
-			user = authenticate(username=username, password=password)
+# 			# returns User objects if credentials are correct
+# 			user = authenticate(username=username, password=password)
 
-			if user is not None:
+# 			if user is not None:
 
-				if user.is_active:
-					login(request, user)
-					return redirect('home')
-			else:
-				return render(request, self.template_name, {'form': form})
+# 				if user.is_active:
+# 					login(request, user)
+# 					return redirect('home')
+# 			else:
+# 				return render(request, self.template_name, {'form': form})

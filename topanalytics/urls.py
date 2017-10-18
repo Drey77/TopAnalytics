@@ -22,9 +22,10 @@ from accounts.views import login_view, register_view, logout_view
 
 urlpatterns = [
     url(r'^$', views.HomePageView.as_view(), name='home'),
-    url(r'^register/$', views.UserFormView.as_view(), name='register'),
-	url(r'^login/$', login_view, name='login'),
     url(r'^admin/', admin.site.urls),
+    url(r'^register/$', register_view, name='register'),
+    url(r'^login/$', login_view, name='login'),
+	url(r'^logout/$', logout_view, name='logout'),
     url(r'^board$', views.BoardView.as_view(), name='board'),
     url(r'^pixel/(?P<pixel>\w+).gif$', views.PixelView.as_view(), name='pixel'),
     url(r'^online-users$', views.online_users, name='online-users'),
