@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content_title %}{% endblock %}
+
+{% block title %}
+TopAnalytics - Inscription
+{% endblock %}
+
+{% block header %}
+<!-- hide the header on login page -->
+{% endblock %}
+
+{% block content%}
+
+
+
+<!-- REGISTER FORM -->
+<div class="login-container register">
+	<div class="row row-eq-height">
+		<div class="col-md-4 col-sm-3 col-xs-12 login-left-block hidden-xs">
+			<span class="login-logo"></span>
+			<p>TopAnalytics est une application web en version alpha, réalisée pour l’association Top Mission. Elle permet de visualiser le nombre d’internautes en ligne en temps réel du site TopChrétien.com sur une carte du monde interactive. Les informations de profil des membres du site TopChrétien.com peuvent être affichées à la fois sur cette carte et aussi dans un tableau descriptif.</p>
+		</div>
+		<div class="col-md-8 col-sm-9 col-xs-12">
+			<div class="login-tabs {{ title }}">
+				<li class="connexion-tab"><a href="{%url 'login' %}">Connexion</a></li>
+				<li class="register-tab"><a href="javascript:void();">Inscription</a></li>
+			</div>
+			<!-- Main Form -->
+			<form id="register-form" class="text-left" method="post" action="{% url 'register' %}">
+				{% csrf_token %}
+				{% if form.errors %}
+				<div class="form-register-error">{{ form.non_field_errors }}</div>
+				{% endif %}
+				<div class="main-login-form">
+					<div class="login-group">
+						<div class="form-group">
+							<label for="reg_username">Nom d'utilisateur</label>
+							<span class="input-block">{{ form.username }}</span>
+						</div>
+						<div class="form-group">
+							<label for="reg_email">E-mail</label>
+							<span class="input-block">{{ form.email }}</span>
+						</div>
+						<div class="form-group">
+							<label for="reg_password">Mot de passe</label>
+							<span class="input-block">{{ form.password }}</span>
+						</div>
+						<div class="form-group">
+							<label for="reg_password_confirm">Confirmation du mot de passe</label>
+							<span class="input-block">{{ form.password2 }}</span>
+						</div>
+						<div class="form-group">
+							<label for="reg_firstname">Prénom</label>
+							<span class="input-block">{{ form.first_name }}</span>
+						</div>
+						<div class="form-group">
+							<label for="reg_lastname">Nom</label>
+							<span class="input-block">{{ form.last_name }}</span>
+						</div>
+					</div>
+					<button type="submit" class="btn-sm btn-outline btn-blue">Envoyer</button>
+				</div>
+
+				<!-- ICI DANS LE IF REGISTERED, TU PEUX METTRE CE QUE TU VEUX -->
+				{% if registered %}
+				<div class="register-success">
+	            <strong>Inscription réussie ! </strong>
+	        	</div>
+	     		{% endif %}
+							<div class="etc-login-form">
+					<p>Vous avez déjà un compte ? <a href="{%url 'login' %}">Connectez-vous ici</a></p>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+
+<script>
+	$('.input-block > input').bind('blur', function(){
+		$(this).parent().toggleClass('focused');
+	});
+
+	$('.input-block > input').bind('focus', function(){
+		$(this).parent().toggleClass('focused');
+	});
+</script>
+
+
+{% endblock %}

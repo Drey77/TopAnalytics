@@ -6,23 +6,29 @@
   {% leaflet_js %}
   {% leaflet_css %}
   <link rel="stylesheet" type="text/css" href="{% static './css/datatables.min.css'%}" />
+  <link rel="stylesheet" type="text/css" href="{% static './css/responsive.dataTables.min.css'%}" />
   <script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"> </script>
   <script type="text/javascript" src="{% static 'dist/leaflet-realtime.js' %}"> </script>
   <script src="{% static "js/datatables.min.js" %}"></script>
+  <script src="{% static "js/dataTables.responsive.min.js" %}"></script>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 {% endblock head %}
 
 {% block title %}
-Utilisateurs en ligne
+TopAnalytics - Utilisateurs en ligne
 {% endblock %}
 
 {% block content%}
 
 <section id="world-map">
-  <h1>World Map</h1>
+  <!--<h1>World Map</h1>-->
   {% leaflet_map "main_map" callback="main_map_init" %}
 </section>
 
-<div id="user-container"></div>
+<div id="user-container">
+
+</div>
+
 {% endblock %}
 
 {% block script %}
@@ -50,7 +56,6 @@ Utilisateurs en ligne
 			crossOrigin: true,
 			type:'json'
 		}, {
-			interval: 15000,
 			getFeatureId: function(feature){
 				return feature.id;
 			},
@@ -61,11 +66,12 @@ Utilisateurs en ligne
 				} else {
 					user_city = feature.properties.user_city
 				};
-				popupContent = '<img src="'+feature.properties.profile_picture+'" />' + " </br> Pseudo : " + feature.properties.nickname + " </br> Sexe : " + feature.properties.gender + " </br> Ville : " + user_city + " </br> Pays : " + feature.properties.user_country;
+				popupContent = '<img src="'+feature.properties.profile_picture+'" />' + " </br> <span>Pseudo</span> : " + feature.properties.nickname + " </br> <span>Sexe</span> : " + feature.properties.gender + " </br> <span>Ville</span> : " + user_city + " </br> <span>Pays</span> : " + feature.properties.user_country;
 				layer.bindPopup(popupContent, {
 					maxWidth: "auto"
 				});
-			}
+			},
+			interval: 15000
 		});
 		online_user_data.addTo(map);
 	}

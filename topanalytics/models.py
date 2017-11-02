@@ -36,7 +36,7 @@ class ActionType(models.Model):
 
 
 class WebsiteUser(models.Model):
-	website_user_id = models.CharField(max_length=254, blank=True, unique=True)
+	website_user_id = models.CharField(max_length=254, blank=True)
 	nickname = models.CharField(max_length=25, blank=True)
 	profile_picture = models.CharField(max_length=254, blank=True)
 	gender = models.CharField(max_length=254, blank=True)
@@ -48,7 +48,8 @@ class WebsiteUser(models.Model):
 	user_country = models.CharField(max_length=254, blank=True)
 	latitude = models.FloatField(null=True, blank=True)
 	longitude = models.FloatField(null = True, blank=True)
-	geom = gismodels.PointField(default=Point(x=0, y=0, srid=4326), blank=True, srid=4326)
+	ip_address = models.CharField(max_length=254, blank=True, unique=True, null=True)
+	geom = gismodels.PointField(default=Point(x=0, y=0, srid=4326), blank=True, srid=4326, max_length=254)
 	objects = gismodels.GeoManager()
 
 	def __str__(self):

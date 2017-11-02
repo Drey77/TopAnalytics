@@ -1,17 +1,83 @@
-
 <section id="users-online">
+	<div class="container">
+		<div class="base-widget">
+			<div class="widget-title">
+				<h2>Utilisateurs en ligne : <span>{{users_online}}</span></h2>
+			</div>
+				<div class="widget-content">
 
-	<div>
-		Online users : {{users_online}}
+<script>
+$(document).ready(function() {
+    $('#data-table').DataTable( {
+        responsive: true,
+        columnDefs: [ {
+            targets: [ 0 ],
+            orderData: [ 0, 1 ]
+        }, {
+            targets: [ 1 ],
+            orderData: [ 1, 0 ]
+        }, {
+            targets: [ 4 ],
+            orderData: [ 4, 0 ]
+        } ],
+            "language": {
+                "sProcessing":     "Traitement en cours...",
+                "sSearch":         "Rechercher&nbsp;:",
+                "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+                "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+                "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                "sInfoPostFix":    "",
+                "sLoadingRecords": "Chargement en cours...",
+                "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
+                "oPaginate": {
+                    "sFirst":      "Premier",
+                    "sPrevious":   "Pr&eacute;c&eacute;dent",
+                    "sNext":       "Suivant",
+                    "sLast":       "Dernier"
+                },
+                "oAria": {
+                    "sSortAscending":  ": activer pour trier la colonne par ordre croissant",
+                    "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                }
+            }
+    } );
+} );
+</script>
+<table id="data-table" class="display" width="100%" cellspacing="0">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Pseudo</th>
+                <th>Sexe</th>
+                <th>Pays</th>
+                <th>Ville</th>
+                <th>Dernière activité</th>
+            </tr>
+        </thead>
+        <tbody>
+        	{% for img in imgs %}
+				<tr>
+					<td><img src="{{img.profile_picture}}" class="img-circle" width="40px"></td>
+					<td>{{img.nickname}}</td>
+					<td>{{img.gender}}</td>
+					<td>{{img.user_country}}</td>
+					<td>{{img.user_city}}</td>
+					<td>{{img.last_active}}</td>
+				</tr>
+			{% endfor %}
+        </tbody>
+</table>
+
+<!-- utile ??
+					<div id="img-section">
+
+					</div>
+-->
+
+				</div>
+		</div>
+
 	</div>
 </section>
-
-<section id="img-section">
-	{% for img in imgs %}
-	<div>
-		<img src="{{img.profile_picture}}"> Locality : {{img.user_city}}
-	</div>
-	{% endfor %}
-</section>
-
-

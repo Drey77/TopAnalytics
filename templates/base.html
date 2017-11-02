@@ -1,5 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
 
 <script src="{% static "js/jquery-3.2.1.min.js" %}"></script>
 <script src="{% static "js/bootstrap.min.js" %}"></script>
@@ -8,24 +9,100 @@
 <html lang="{{ LANGUAGE_CODE|default:"fr-fr" }}">
 <head>
     <meta charset="utf-8">
-  {% block head %}{% endblock head %}
-	<title>{% block title %}{% endblock %}</title>
-	<link rel="stylesheet" type="text/css" href="{% static './style.css'%}" />
-  <!-- Bootstrap -->
-  <link rel="stylesheet" type="text/css" href="{% static './css/bootstrap.min.css'%}" />
+    {% block head %}{% endblock head %}
+    <title>{% block title %}{% endblock %}</title>
+
+    <!-- FAVICON -->
+    <link rel="apple-touch-icon" sizes="57x57" href="{% static "assets/favicons/apple-icon-57x57.png" %}">
+    <link rel="apple-touch-icon" sizes="60x60" href="{% static "assets/favicons/apple-icon-60x60.png" %}">
+    <link rel="apple-touch-icon" sizes="72x72" href="{% static "assets/favicons/apple-icon-72x72.png" %}">
+    <link rel="apple-touch-icon" sizes="76x76" href="{% static "assets/favicons/apple-icon-76x76.png" %}">
+    <link rel="apple-touch-icon" sizes="114x114" href="{% static "assets/favicons/apple-icon-114x114.png" %}">
+    <link rel="apple-touch-icon" sizes="120x120" href="{% static "assets/favicons/apple-icon-120x120.png" %}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{% static "assets/favicons/apple-icon-144x144.png" %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static "assets/favicons/apple-icon-152x152.png" %}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static "assets/favicons/apple-icon-180x180.png" %}">
+    <link rel="icon" type="image/png" sizes="192x192"  href="{% static "assets/favicons/android-icon-192x192.png" %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static "assets/favicons/favicon-32x32.png" %}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{% static "assets/favicons/favicon-96x96.png" %}">
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static './css/style.css'%}" />
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" type="text/css" href="{% static './css/bootstrap.min.css'%}" />
 
 </head>
 
 <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}{% endblock %}">
 
+<!-- LOADER -->
+<div class="loader-icon">
+<div class="map-marker"></div>
+<div class="pulsation"></div>
+</div>
+<script>
+    $(window).on('load', function(){ $(".loader-icon").fadeOut("slow");; });
+</script>
 
-<!-- Container -->
-<div id="container">
+    {% block header %}
+    <div class="navbar navbar-default navbar-fixed-top">
+        <header id="header-site">
 
-	{% block nav-global %}{% endblock %}
+            <div class="logo-site">
 
-	<!-- Content -->
-    <div id="content" class="{% block coltype %}colM{% endblock %}">
+                <h1><a href="{% url 'home' %}">TopAnalytics</a></h1>
+
+            </div>
+<!-- {% if request.GET.url == 'map' %} -->
+<!-- {% endif %} -->
+            {% block header_info %}
+            {% endblock %}
+            <!--Begin::Header right-->
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-right pull-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                        <span class="user-icon">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                 width="652.801px" height="652.801px" viewBox="0 0 652.801 652.801" style="enable-background:new 0 0 652.801 652.801;"
+                 xml:space="preserve">
+            <g>
+                <g>
+                    <g>
+                        <path d="M473.056,359.02C496.128,321.483,510,274.972,510,224.4C510,100.47,427.809,0,326.4,0S142.8,100.47,142.8,224.4
+                            c0,50.572,13.872,97.083,36.965,134.62C84.864,404.043,20.4,491.232,20.4,591.6V612c0,22.541,18.278,40.801,40.8,40.801h530.4
+                            c22.542,0,40.8-18.26,40.8-40.801v-20.4C632.4,491.211,567.937,404.043,473.056,359.02z M326.4,61.2
+                            c66.341,0,122.4,74.746,122.4,163.2s-56.06,163.2-122.4,163.2S204,312.854,204,224.4S260.06,61.2,326.4,61.2z M81.601,591.6
+                            c0-80.967,56.916-150.939,139.128-183.865c29.906,25.785,66.3,41.066,105.672,41.066s75.766-15.281,105.672-41.066
+                            C514.284,440.66,571.2,510.633,571.2,591.6H81.601z"/>
+                    </g>
+                </g>
+            </g>
+            </svg>
+                        </span>
+                        <span class="user-name">{{user.get_username }}<span class="caret"></span></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- <li><a href="#">Modifier mon profil</a></li> -->
+                        <!-- <li class="divider"></li> -->
+                        <li><a href="{% url 'logout' %}?next={{request.path}}">Déconnexion</a></li>
+                    </ul>
+                </li>
+            </ul>
+            {% endif %}
+            <!--End::Header Right-->
+        </header>
+    </div>
+    {% endblock %}
+
+    <!-- Container -->
+    <div id="container">
+
+       {% block nav-global %}{% endblock %}
+
+       <!-- Content -->
+       <div id="content" class="{% block coltype %}colM{% endblock %}">
         {% block pretitle %}{% endblock %}
         {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
 
@@ -43,57 +120,75 @@
 </div>
 <!-- END Container -->
 <script>
-(function() {
+    (function() {
 
-/********Temporary, for testing*********/
+        /********Temporary, for testing*********/
 
-  sim_visitors();
+        sim_visitors();
 
-  function ping_users(){
+        function ping_users(){
 
-    setTimeout(function(){
-      sim_visitors();
-      console.log("ping_users done at : " + Date());
-    }, 60000);
-  }
+            setTimeout(function(){
+              sim_visitors();
+              console.log("ping_users done at : " + Date());
+          }, 240000);
+        }
 
-  function sim_visitors(){
-    var img = new Image,
-        nickname = encodeURIComponent('Drey77'),
-        website_user_id = encodeURIComponent('1234'),
-        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
-        gender = encodeURIComponent('male');
-        date = Date.now();
+        function sim_visitors(){
+            var img = new Image,
+            nickname = encodeURIComponent('Drey77'),
+            website_user_id = encodeURIComponent('1234'),
+            profile_picture = encodeURIComponent(''),
+            gender = encodeURIComponent('male');
+            date = Date.now();
 
-    img.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=88.190.229.170";
+            img.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=88.190.229.170";
 
-    var img2 = new Image,
-        nickname = encodeURIComponent('TestCase'),
-        website_user_id = encodeURIComponent('1111'),
-        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
-        gender = encodeURIComponent('male');
-        date = Date.now();
+            var img2 = new Image,
+            nickname = encodeURIComponent('TestCase'),
+            website_user_id = encodeURIComponent('1111'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('male');
+            date = Date.now();
 
-    img2.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=130.93.10.89";
+            img2.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=130.93.10.89";
 
-    var img3 = new Image,
-        nickname = encodeURIComponent('DrDrey'),
-        website_user_id = encodeURIComponent('12345'),
-        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
-        gender = encodeURIComponent('male');
-        date = Date.now();
+            var img3 = new Image,
+            nickname = encodeURIComponent('DrDrey'),
+            website_user_id = encodeURIComponent('12345'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('female');
+            date = Date.now();
 
-    img3.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=88.190.229.170";
+            img3.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=88.190.229.169";
 
 
-    var img4 = new Image,
-        nickname = encodeURIComponent('TestCase1'),
-        website_user_id = encodeURIComponent('1112'),
-        profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
-        gender = encodeURIComponent('male');
-        date = Date.now();
+            var img4 = new Image,
+            nickname = encodeURIComponent('TestCase1'),
+            website_user_id = encodeURIComponent('1112'),
+            profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
+            gender = encodeURIComponent('f'),
+            date = Date.now();
 
-    img4.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date;
+            img4.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date;
+
+            var img5 = new Image,
+            nickname = encodeURIComponent(''),
+            website_user_id = encodeURIComponent(''),
+            profile_picture = encodeURIComponent(''),
+            gender = encodeURIComponent('male');
+            date = Date.now();
+
+            img5.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=88.190.229.171";
+
+            var img6 = new Image,
+            nickname = encodeURIComponent(''),
+            website_user_id = encodeURIComponent(''),
+            profile_picture = encodeURIComponent(''),
+            gender = encodeURIComponent('male');
+            date = Date.now();
+
+            img6.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender + "&visit_date=" + date + "&ip_address=88.190.229.172";
 /*
     var img4 = new Image,
           nickname = encodeURIComponent('TestCase2'),
@@ -270,13 +365,13 @@
             profile_picture = encodeURIComponent('https://s.topchretien.com/media/75/user/77/photo1_compressed.jpg'),
             gender = encodeURIComponent('male');
 
-        img25.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;*/
+            img25.src = 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;*/
 
-    console.log("simulation of visits");
-    ping_users();
-  }
+            console.log("simulation of visits");
+            ping_users();
+        }
 
-})()
+    })()
 
 //Pour serveur test : 'https://andre.test.topchretien.com/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;
 //Pour serveur local : 'http://localhost:8000/pixel/top_user.gif?website_user_id=' + website_user_id + '&nickname=' + nickname + '&profile_picture=' + profile_picture + '&gender=' + gender;

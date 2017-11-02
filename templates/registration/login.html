@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content_title %}{% endblock %}
+
+{% block title %}
+TopAnalytics - Connexion
+{% endblock %}
+
+{% block header %}
+<!-- hide the header on login page -->
+{% endblock %}
+
+{% block content%}
+
+
+
+
+
+<!-- LOGIN FORM -->
+<div class="login-container">
+    <div class="row">
+        <div class="col-md-4 col-sm-3 col-xs-12 login-left-block hidden-xs">
+            <span class="login-logo"></span>
+            <p>TopAnalytics est une application web en version alpha, réalisée pour l’association Top Mission. Elle permet de visualiser le nombre d’internautes en ligne en temps réel du site TopChrétien.com sur une carte du monde interactive. Les informations de profil des membres du site TopChrétien.com peuvent être affichées à la fois sur cette carte et aussi dans un tableau descriptif.
+            </p>
+        </div>
+        <div class="col-md-8 col-sm-9 col-xs-12">
+            <div class="login-tabs {{ title }}">
+                <li class="connexion-tab"><a href="javascript:void();">Connexion</a></li>
+                <li class="register-tab"><a href="{%url 'register' %}">Inscription</a></li>
+            </div>
+            <!-- Main Form -->
+            <div class="login-form-main-message"></div>
+            <form method="post" action="{% url 'login' %}" class="text-center">
+                                    {% if form.errors %}
+                    <div class="form-login-error">{{ form.non_field_errors }}
+                    </div>
+                    {% endif %}
+                {% csrf_token %}
+                <div class="form-group">
+                    <label>Nom d'utilisateur</label>
+                    <span class="input-block">{{ form.username }}</span>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <span class="input-block">{{ form.password }}</span>
+
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" value="Connexion" class="btn-sm btn-outline btn-blue"> {{ title }}</button>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </div>
+                <div class="etc-register-form">
+                    <p>Vous n'avez pas de compte ? <a href="{%url 'register' %}">Créez un compte</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+
+    $('.input-block > input').bind('blur', function(){
+        $(this).parent().toggleClass('focused');
+    });
+
+    $('.input-block > input').bind('focus', function(){
+        $(this).parent().toggleClass('focused');
+    });
+</script>
+
+
+
+
+<!--    Main Form
+<div class="login-form-1">
+    <form id="login-form" class="text-left">
+        <div class="login-form-main-message"></div>
+        <div class="main-login-form">
+            <div class="login-group">
+                <div class="form-group">
+                    <label for="lg_username" class="sr-only">Username</label>
+                    <input type="text" class="form-control" id="lg_username" name="lg_username">
+                </div>
+                <div class="form-group">
+                    <label for="lg_password" class="sr-only">Password</label>
+                    <input type="password" class="form-control" id="lg_password" name="lg_password">
+                </div>
+                <div class="form-group login-group-checkbox">
+                    <input type="checkbox" id="lg_remember" name="lg_remember">
+                    <label for="lg_remember">remember</label>
+                </div>
+            </div>
+            <button type="submit" class="login-button"><i class="btn btn-default" value='{{ title }}'></i></button>
+        </div>
+        <div class="etc-login-form">
+            <p>forgot your password? <a href="#">click here</a></p>
+            <p>new user? <a href="#">create new account</a></p>
+        </div>
+    </form>
+</div> -->
+<!-- end:Main Form -->
+
+{% endblock %}

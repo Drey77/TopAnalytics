@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+{% load leaflet_tags %}
+
+{% block head %}
+  {% leaflet_js %}
+  {% leaflet_css %}
+  <script type="text/javascript" src="{% static 'dist/leaflet.ajax.js' %}"> </script>
+  <script type="text/javascript" src="{% static 'dist/leaflet-realtime.js' %}"> </script>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+{% endblock head %}
+
+{% block title %}
+TopAnalytics - Utilisateurs en ligne
+{% endblock %}
+
+
+{% block header_info %}
+		<div id="map-info">
+			<h2>Utilisateurs en ligne : <span>{{users_online}}</span></h2>
+		</div>
+
+{% endblock %}
+
+{% block content%}
+
+<section id="world-map">
+  <!--<h1>World Map</h1>-->
+  {% leaflet_map "map-only" callback="main_map_init" %}
+</section>
+
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+	function main_map_init (map, options) {
+
+		var online_user_data = new L.realtime({
+			url : "{% url 'data' %}",
+			crossOrigin: true,
+			type:'json'
+		}, {
+			interval: 15000,
+			getFeatureId: function(feature){
+				return feature.id;
+			},
+			onEachFeature: function(feature, layer){
+				if (feature.properties.user_city == "unknown"){
+					feature.properties.user_city = "Inconnue";
+					user_city = feature.properties.user_city
+				} else {
+					user_city = feature.properties.user_city
+				};
+				popupContent = '<img src="'+feature.properties.profile_picture+'" />' + " </br> Pseudo : " + feature.properties.nickname + " </br> Sexe : " + feature.properties.gender + " </br> Ville : " + user_city + " </br> Pays : " + feature.properties.user_country;
+				layer.bindPopup(popupContent, {
+					maxWidth: "auto"
+				});
+			}
+		});
+		online_user_data.addTo(map);
+	}
+</script>
+{% endblock %}
